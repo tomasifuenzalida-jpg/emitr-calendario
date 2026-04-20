@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendario Optimizado — Metricool | EMITR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Azeret+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060606;--surface:#0d0d0d;--surface2:#131313;--border:#1c1c1c;
+  --text:#e4e4e4;--muted:#707070;--accent:#8b2020;
+  --accent-bright:#c03030;--accent-intense:#e03535;--accent-dark:#5a1515;--accent-deep:#1e0808;
+  --green:#2d6a30;--green-bright:#4caf50;
+  --yellow:#a68a00;--yellow-bright:#ffc107;
+  --font-display:'Bebas Neue',sans-serif;--font-body:'Azeret Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);font-size:13px;line-height:1.6;
+  color:var(--text);background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;
+  opacity:0.028;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size:180px 180px;
+}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+
+.container{max-width:1100px;margin:0 auto;padding:24px 20px 80px}
+
+/* Hero */
+.hero{text-align:center;padding:72px 20px 56px;position:relative}
+.hero-label{
+  font-family:var(--font-body);font-size:11px;letter-spacing:4px;
+  color:var(--accent-bright);text-transform:uppercase;margin-bottom:12px;
+}
+.hero h1{
+  font-family:var(--font-display);font-size:clamp(42px,8vw,80px);
+  line-height:0.95;color:var(--text);letter-spacing:2px;margin-bottom:8px;
+}
+.hero h1 span{color:var(--accent-bright)}
+.hero-sub{
+  font-size:12px;color:var(--muted);max-width:560px;margin:16px auto 0;line-height:1.7;
+}
+
+/* Section titles */
+.section-title{
+  font-family:var(--font-display);font-size:clamp(28px,5vw,44px);
+  color:var(--text);letter-spacing:1px;margin-bottom:4px;
+}
+.section-sub{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px}
+
+/* Cards */
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:24px;margin-bottom:16px;
+}
+.card-header{
+  display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;
+}
+.card-header h3{
+  font-family:var(--font-display);font-size:24px;letter-spacing:1px;color:var(--text);
+}
+
+/* Phase label */
+.phase-label{
+  display:inline-block;padding:3px 10px;border-radius:4px;
+  font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  background:var(--accent-deep);color:var(--accent-bright);border:1px solid var(--accent-dark);
+}
+
+/* Post items */
+.post-item{
+  display:grid;grid-template-columns:56px 1fr;gap:16px;
+  padding:16px 0;border-bottom:1px solid var(--border);
+  transition:opacity 0.3s;
+}
+.post-item:last-child{border-bottom:none}
+.post-item.published{opacity:0.45}
+.post-date{
+  font-family:var(--font-display);font-size:28px;line-height:1;color:var(--text);
+  text-align:center;
+}
+.post-date small{
+  display:block;font-family:var(--font-body);font-size:10px;
+  color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;
+}
+.post-info{display:flex;flex-direction:column;gap:6px}
+.post-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.post-type{
+  display:inline-block;padding:2px 8px;border-radius:3px;
+  font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+}
+.type-reel{background:var(--accent-deep);color:var(--accent-bright);border:1px solid var(--accent-dark)}
+.type-carrusel{background:#0d1a2e;color:#4a90d9;border:1px solid #1a2a40}
+.type-story{background:#1a1a0d;color:#a69340;border:1px solid #2a2a1c}
+.type-youtube{background:#1a0d0d;color:#cc4444;border:1px solid #2a1c1c}
+.type-lanzamiento{background:#1a0d1a;color:#a855f7;border:1px solid #2a1c2a}
+
+.post-time{font-size:11px;color:var(--muted)}
+.post-desc{font-size:12px;color:var(--text);line-height:1.5}
+
+/* Audience bar */
+.audience-row{display:flex;align-items:center;gap:10px;margin-top:4px}
+.audience-bar-wrap{
+  flex:1;max-width:200px;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;
+}
+.audience-bar{height:100%;border-radius:3px;transition:width 0.6s ease-out}
+.audience-pct{font-size:11px;font-weight:600;min-width:36px}
+.pct-top{color:var(--accent-bright)}
+.pct-good{color:var(--green-bright)}
+.pct-mid{color:var(--muted)}
+.pct-weak{color:var(--yellow-bright)}
+
+/* Badges */
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:2px 7px;border-radius:3px;font-size:9px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;
+}
+.badge-top{background:var(--accent-deep);color:var(--accent-bright);border:1px solid var(--accent-dark)}
+.badge-good{background:#0d1a0d;color:var(--green-bright);border:1px solid #1a2a1a}
+.badge-weak{background:#1a1a0d;color:var(--yellow-bright);border:1px solid #2a2a1c}
+.badge-done{background:#0d1a0d;color:var(--green-bright);border:1px solid #1a2a1a}
+.badge-note{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+
+/* Summary stats */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:32px;
+}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:20px;text-align:center;
+}
+.stat-value{
+  font-family:var(--font-display);font-size:48px;line-height:1;
+  margin-bottom:4px;
+}
+.stat-label{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.stat-detail{font-size:11px;color:var(--text);margin-top:6px}
+
+/* Protocol table */
+.proto-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:16px}
+.proto-table th{
+  text-align:left;padding:10px 12px;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--border);background:var(--surface);
+}
+.proto-table td{
+  padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle;
+}
+.proto-table tr:hover td{background:var(--surface2)}
+
+/* Tactics */
+.tactics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.tactic-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:24px;display:flex;gap:16px;align-items:flex-start;
+}
+.tactic-num{
+  font-family:var(--font-display);font-size:52px;line-height:1;
+  color:var(--accent-dark);min-width:48px;text-align:center;
+}
+.tactic-content h4{
+  font-family:var(--font-display);font-size:18px;letter-spacing:1px;
+  color:var(--text);margin-bottom:6px;
+}
+.tactic-content p{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* Heatmap */
+.heatmap-wrap{overflow-x:auto;margin-top:16px;-webkit-overflow-scrolling:touch}
+.heatmap{width:100%;border-collapse:collapse;font-size:11px;min-width:640px}
+.heatmap th{
+  padding:8px 6px;font-size:10px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--muted);text-align:center;border-bottom:1px solid var(--border);
+  background:var(--surface);position:sticky;top:0;
+}
+.heatmap th:first-child{text-align:right;min-width:50px}
+.heatmap td{
+  padding:6px;text-align:center;border:1px solid var(--bg);
+  border-radius:3px;font-weight:500;font-size:10px;
+  transition:transform 0.15s;
+}
+.heatmap td:hover{transform:scale(1.15);z-index:2;position:relative}
+.heatmap td:first-child{
+  text-align:right;background:transparent !important;color:var(--muted);
+  font-weight:400;border:none;
+}
+
+/* Rules box */
+.rules-box{
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:24px;margin-top:16px;
+}
+.rules-box ul{list-style:none;padding:0}
+.rules-box li{
+  padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;
+  color:var(--text);line-height:1.6;
+}
+.rules-box li:last-child{border-bottom:none}
+.rules-box li strong{color:var(--accent-bright)}
+
+/* Plan toggle */
+.plan-toggle{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.plan-btn{
+  padding:6px 16px;border-radius:4px;font-size:11px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  font-family:var(--font-body);transition:all 0.2s;
+}
+.plan-btn.active{
+  background:var(--accent-deep);color:var(--accent-bright);border-color:var(--accent-dark);
+}
+.plan-content{display:none}
+.plan-content.active{display:block}
+
+/* Divider */
+.divider{
+  height:1px;background:var(--border);margin:48px 0;
+}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease-out,transform 0.5s ease-out}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Responsive */
+@media(max-width:960px){
+  .container{padding:16px 16px 60px}
+  .hero{padding:48px 16px 40px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .tactics-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .hero h1{font-size:36px}
+  .post-item{grid-template-columns:44px 1fr;gap:10px}
+  .post-date{font-size:22px}
+  .stats-grid{grid-template-columns:1fr}
+  .stat-value{font-size:36px}
+  .tactic-num{font-size:40px;min-width:36px}
+  .audience-bar-wrap{max-width:120px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero reveal">
+  <div class="hero-label">Campaña EMITR &mdash; 1 Abril &ndash; 2 Mayo 2026</div>
+  <h1>CALENDARIO <span>OPTIMIZADO</span></h1>
+  <h1 style="font-size:clamp(24px,4vw,40px);color:var(--muted);margin-top:-4px">METRICOOL</h1>
+  <p class="hero-sub">Calendario de publicaciones optimizado con datos reales de audiencia conectada. Cada slot ha sido verificado contra el mapa de calor de Metricool para maximizar alcance en una cuenta que necesita recalentamiento.</p>
+</section>
+
+<div class="container">
+
+<!-- RESUMEN METRICOOL -->
+<section class="reveal">
+  <h2 class="section-title">Resumen de Audiencia</h2>
+  <p class="section-sub">Datos reales Metricool &mdash; % audiencia conectada por slot</p>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value" style="color:var(--accent-intense)">100%</div>
+      <div class="stat-label">Mejor slot</div>
+      <div class="stat-detail">Jueves 10:00</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" style="color:var(--accent-bright)">97%</div>
+      <div class="stat-label">Segundo mejor</div>
+      <div class="stat-detail">Martes 10:00</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" style="color:var(--green-bright)">82%</div>
+      <div class="stat-label">Tercer slot</div>
+      <div class="stat-detail">Domingo 10:00</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" style="color:var(--yellow-bright)">38%</div>
+      <div class="stat-label">Peor dia</div>
+      <div class="stat-detail">Sabado (max 38%)</div>
+    </div>
+  </div>
+
+  <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+    <div class="card" style="padding:16px">
+      <div style="font-size:10px;color:var(--accent-bright);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Top Slots (&gt;80%)</div>
+      <div style="font-size:12px;line-height:1.8;color:var(--text)">
+        Jue 10:00 &mdash; 100% &bull; Mar 10:00 &mdash; 97% &bull; Jue 12:00 &mdash; 88% &bull; Mie 12:00 &mdash; 85% &bull; Dom 10:00 &mdash; 82%
+      </div>
+    </div>
+    <div class="card" style="padding:16px">
+      <div style="font-size:10px;color:var(--yellow-bright);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Dias debiles (&lt;50%)</div>
+      <div style="font-size:12px;line-height:1.8;color:var(--text)">
+        Viernes &mdash; max 50% &bull; Sabado &mdash; max 38%
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FASE 0 -->
+<section class="reveal">
+  <div class="card">
+    <div class="card-header">
+      <span class="phase-label">Fase 0</span>
+      <h3>Senal &mdash; 1&ndash;5 Abril</h3>
+      <span class="badge badge-done">Completada</span>
+    </div>
+    <div class="post-item published" data-date="2026-04-01">
+      <div class="post-date">1<small>Mie</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-story">Story</span>
+          <span class="badge badge-done">Publicada</span>
+        </div>
+        <div class="post-desc">Story audio ambiente puro &mdash; primera senal de actividad</div>
+      </div>
+    </div>
+    <div class="post-item published" data-date="2026-04-05">
+      <div class="post-date">5<small>Dom</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-story">Story</span>
+          <span class="badge badge-done">Publicada</span>
+        </div>
+        <div class="post-desc">Story audio ambiente puro &mdash; segunda senal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 1 -->
+<section class="reveal">
+  <div class="card">
+    <div class="card-header">
+      <span class="phase-label">Fase 1</span>
+      <h3>Presencia &mdash; 8&ndash;12 Abril</h3>
+      <span class="badge badge-done">Completada</span>
+    </div>
+
+    <div class="post-item published" data-date="2026-04-08">
+      <div class="post-date">8<small>Mie</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-reel">Reel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-done">Publicado</span>
+        </div>
+        <div class="post-desc">Studio Experiment 01 &mdash; reel multicamara Track 01</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:70%;background:var(--muted)"></div></div>
+          <span class="audience-pct pct-mid">70%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item published" data-date="2026-04-09">
+      <div class="post-date">9<small>Jue</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-story">Story</span>
+          <span class="post-time">12:00h</span>
+        </div>
+        <div class="post-desc">Story handycam &mdash; detalles equipo de estudio</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:88%;background:var(--green-bright)"></div></div>
+          <span class="audience-pct pct-good">88%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item published" data-date="2026-04-10">
+      <div class="post-date">10<small>Vie</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-carrusel">Carrusel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-weak">Dia debil</span>
+        </div>
+        <div class="post-desc">Carrusel 01 &mdash; fotos analogicas estudio</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:50%;background:var(--yellow-bright)"></div></div>
+          <span class="audience-pct pct-weak">50%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item published" data-date="2026-04-11">
+      <div class="post-date">11<small>Sab</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-story">Story</span>
+          <span class="post-time">12:00h</span>
+          <span class="badge badge-weak">Dia debil</span>
+        </div>
+        <div class="post-desc">Story handycam</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:35%;background:var(--yellow-bright)"></div></div>
+          <span class="audience-pct pct-weak">35%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item published" data-date="2026-04-12">
+      <div class="post-date">12<small>Dom</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-reel">Reel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-good">Buen slot</span>
+        </div>
+        <div class="post-desc">Studio Experiment 02 &mdash; reel multicamara Track 02</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:82%;background:var(--green-bright)"></div></div>
+          <span class="audience-pct pct-good">82%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 2 -->
+<section class="reveal">
+  <div class="card">
+    <div class="card-header">
+      <span class="phase-label">Fase 2</span>
+      <h3>Identidad &mdash; 14&ndash;17 Abril</h3>
+      <span class="badge badge-done">Completada</span>
+    </div>
+
+    <div class="post-item published" data-date="2026-04-14">
+      <div class="post-date">14<small>Mar</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-reel">Reel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-done">Publicado</span>
+        </div>
+        <div class="post-desc">Studio Experiment 03 &mdash; reel multicamara</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:97%;background:var(--accent-bright)"></div></div>
+          <span class="audience-pct pct-top">97%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item published" data-date="2026-04-15">
+      <div class="post-date">15<small>Mie</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-story">Story</span>
+          <span class="post-time">12:00h</span>
+          <span class="badge badge-done">Publicada</span>
+        </div>
+        <div class="post-desc">Story handycam &mdash; ultima story de la campana</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:85%;background:var(--green-bright)"></div></div>
+          <span class="audience-pct pct-good">85%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item published" data-date="2026-04-16" style="border-left:2px solid var(--accent-bright);padding-left:14px">
+      <div class="post-date">16<small>Jue</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-carrusel">Carrusel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-done">Publicado</span>
+        </div>
+        <div class="post-desc">Carrusel 02 &mdash; fotos analogicas del espacio/visuales AZSENDE</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:100%;background:var(--accent-intense)"></div></div>
+          <span class="audience-pct pct-top">100%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 3 -->
+<section class="reveal">
+  <div class="card">
+    <div class="card-header">
+      <span class="phase-label">Fase 3</span>
+      <h3>Tension &mdash; 20&ndash;23 Abril</h3>
+    </div>
+
+    <div class="post-item published" data-date="2026-04-20">
+      <div class="post-date">20<small>Lun</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-reel">Reel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-done">Publicado</span>
+        </div>
+        <div class="post-desc">Reel TON &mdash; solo estudio. Sin texto, sin explicacion</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:74%;background:var(--muted)"></div></div>
+          <span class="audience-pct pct-mid">74%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-04-21" style="border-left:2px solid var(--accent-bright);padding-left:14px">
+      <div class="post-date">21<small>Mar</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-reel">Reel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-top">Top slot</span>
+        </div>
+        <div class="post-desc">Teaser AZSENDE &mdash; 30 seg, solo "24.04"</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:97%;background:var(--accent-bright)"></div></div>
+          <span class="audience-pct pct-top">97%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-04-22" style="opacity:0.4">
+      <div class="post-date" style="color:var(--muted)">22&ndash;23<small>Mie&ndash;Jue</small></div>
+      <div class="post-info">
+        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio total &mdash; tension antes del lanzamiento</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 4 -->
+<section class="reveal">
+  <div class="card">
+    <div class="card-header">
+      <span class="phase-label">Fase 4</span>
+      <h3>Revelacion &mdash; 24&ndash;25 Abril</h3>
+    </div>
+
+    <div class="post-item" data-date="2026-04-24" style="border-left:2px solid #a855f7;padding-left:14px">
+      <div class="post-date">24<small>Jue</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-lanzamiento">Lanzamiento</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-top">Mejor slot</span>
+        </div>
+        <div class="post-desc">Live set completo AZSENDE en YouTube (~25 min) + Reel lanzamiento IG</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:100%;background:var(--accent-intense)"></div></div>
+          <span class="audience-pct pct-top">100%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-04-25">
+      <div class="post-date">25<small>Vie</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-carrusel">Carrusel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-weak">Dia debil</span>
+        </div>
+        <div class="post-desc">Carrusel 03 &mdash; BTS del live set (handycam)</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:50%;background:var(--yellow-bright)"></div></div>
+          <span class="audience-pct pct-weak">50%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 5 -->
+<section class="reveal">
+  <div class="card">
+    <div class="card-header">
+      <span class="phase-label">Fase 5</span>
+      <h3>Expansion &mdash; 28 Abr &ndash; 2 May</h3>
+    </div>
+
+    <div class="post-item" data-date="2026-04-28">
+      <div class="post-date">28<small>Mar</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-reel">Reel</span>
+          <span class="post-time">10:00h</span>
+        </div>
+        <div class="post-desc">Segundo reel live set + YouTube Short 01</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:70%;background:var(--muted)"></div></div>
+          <span class="audience-pct pct-mid">70%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-05-02">
+      <div class="post-date">2<small>Sab</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-youtube">YouTube Short</span>
+          <span class="post-time">18:00h</span>
+          <span class="badge badge-weak">Dia debil</span>
+        </div>
+        <div class="post-desc">YouTube Short 02 &mdash; cierre de campana</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:33%;background:var(--yellow-bright)"></div></div>
+          <span class="audience-pct pct-weak">33%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROTOCOLO STORIES -->
+<section class="reveal">
+  <h2 class="section-title">Protocolo Stories</h2>
+  <p class="section-sub">Compartir reels en stories para empujar alcance</p>
+
+  <div class="rules-box" style="margin-top:0;margin-bottom:24px">
+    <ul>
+      <li><strong>Cuando:</strong> El MISMO DIA de la publicacion del reel, 4-6 horas despues</li>
+      <li><strong>Por que no inmediatamente:</strong> Instagram interpreta que el reel no tiene traccion organica propia</li>
+      <li><strong>Por que no al dia siguiente:</strong> Pierde relevancia y el algoritmo ya decidio su distribucion</li>
+      <li><strong>Formato:</strong> Compartir el reel en story sin anadir nada, o con un sticker minimo. Sin texto tipo "nuevo post"</li>
+    </ul>
+  </div>
+
+  <div class="card" style="padding:0;overflow:hidden">
+    <div style="overflow-x:auto">
+    <table class="proto-table">
+      <thead>
+        <tr>
+          <th>Reel</th>
+          <th>Publicacion</th>
+          <th>Story</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="opacity:0.45">
+          <td>Studio Exp 01 (Mie 8)</td>
+          <td>10:00</td>
+          <td>14:00&ndash;16:00</td>
+          <td><span class="badge badge-done">Publicado</span></td>
+        </tr>
+        <tr style="opacity:0.45">
+          <td>Studio Exp 02 (Dom 12)</td>
+          <td>10:00</td>
+          <td>14:00&ndash;16:00</td>
+          <td><span class="badge badge-done">Publicado</span></td>
+        </tr>
+        <tr style="opacity:0.45">
+          <td>Studio Exp 03 (Mar 14)</td>
+          <td>10:00</td>
+          <td>14:00&ndash;16:00</td>
+          <td><span class="badge badge-done">Publicado</span></td>
+        </tr>
+        <tr style="opacity:0.45">
+          <td>Reel TON (Lun 20)</td>
+          <td>10:00</td>
+          <td>14:00&ndash;16:00</td>
+          <td><span class="badge badge-done">Publicado</span></td>
+        </tr>
+        <tr>
+          <td>Teaser AZSENDE (Mar 21)</td>
+          <td>10:00</td>
+          <td>14:00&ndash;16:00</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td style="color:#a855f7">Reel lanzamiento + Live set YT (Jue 24)</td>
+          <td>10:00</td>
+          <td>14:00&ndash;16:00</td>
+          <td><span class="badge badge-top">Lanzamiento</span></td>
+        </tr>
+        <tr>
+          <td>Segundo reel (Mar 28)</td>
+          <td>10:00</td>
+          <td>14:00&ndash;16:00</td>
+          <td>&mdash;</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TACTICAS DE RECALENTAMIENTO -->
+<section class="reveal">
+  <h2 class="section-title">Tacticas de Recalentamiento</h2>
+  <p class="section-sub">Cuenta inactiva mucho tiempo &mdash; 5 acciones para reactivar el algoritmo</p>
+
+  <div class="tactics-grid">
+    <div class="tactic-card">
+      <div class="tactic-num">1</div>
+      <div class="tactic-content">
+        <h4>Engagement Proactivo</h4>
+        <p>15-20 min antes y despues de cada publicacion: comentar en cuentas de artistas/DJs del nicho. Comentarios reales de 2-3 lineas, no emojis sueltos. Le dice al algoritmo "esta cuenta esta activa".</p>
+      </div>
+    </div>
+    <div class="tactic-card">
+      <div class="tactic-num">2</div>
+      <div class="tactic-content">
+        <h4>Stories Diarias Extra</h4>
+        <p>Entre el 8 y 17 abril: 1 story diaria minima (foto del setup, textura, pantalla DAW, detalle del equipo). Mantiene la cuenta caliente para el algoritmo.</p>
+      </div>
+    </div>
+    <div class="tactic-card">
+      <div class="tactic-num">3</div>
+      <div class="tactic-content">
+        <h4>Compartir Reels en Stories</h4>
+        <p>4-6 horas despues de publicar cada reel (ver protocolo arriba). Empuja trafico del story al feed. No compartir inmediatamente ni al dia siguiente.</p>
+      </div>
+    </div>
+    <div class="tactic-card">
+      <div class="tactic-num">4</div>
+      <div class="tactic-content">
+        <h4>Audio Original</h4>
+        <p>Subir el audio de cada reel como "audio original" (no como musica de biblioteca). Si alguien reutiliza el audio, amplifica la distribucion del reel.</p>
+      </div>
+    </div>
+    <div class="tactic-card">
+      <div class="tactic-num">5</div>
+      <div class="tactic-content">
+        <h4>Hashtags Nicho</h4>
+        <p>5-8 hashtags ultra especificos en cada post: #minimaltechno #deeptechno #studioprocess #electronicmusic #liveset #audiovisual. Evitar genericos como #music #dj.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MAPA DE CALOR -->
+<section class="reveal">
+  <h2 class="section-title">Mapa de Calor</h2>
+  <p class="section-sub">Audiencia conectada por dia y hora &mdash; datos reales Metricool</p>
+
+  <div class="heatmap-wrap">
+    <table class="heatmap" id="heatmap">
+      <thead>
+        <tr>
+          <th>Hora</th>
+          <th>Lun</th>
+          <th>Mar</th>
+          <th>Mie</th>
+          <th>Jue</th>
+          <th>Vie</th>
+          <th>Sab</th>
+          <th>Dom</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:8px;margin-top:16px;flex-wrap:wrap">
+    <span style="font-size:10px;color:var(--muted);letter-spacing:1px">BAJA</span>
+    <div style="display:flex;gap:2px">
+      <div style="width:24px;height:12px;border-radius:2px;background:#1e0808"></div>
+      <div style="width:24px;height:12px;border-radius:2px;background:#3a1010"></div>
+      <div style="width:24px;height:12px;border-radius:2px;background:#5a1515"></div>
+      <div style="width:24px;height:12px;border-radius:2px;background:#8b2020"></div>
+      <div style="width:24px;height:12px;border-radius:2px;background:#c03030"></div>
+      <div style="width:24px;height:12px;border-radius:2px;background:#e03535"></div>
+    </div>
+    <span style="font-size:10px;color:var(--muted);letter-spacing:1px">ALTA</span>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<script>
+// Heatmap data
+const heatData = [
+  {h:'8:00', d:[41,56,48,53,24,19,46]},
+  {h:'9:00', d:[57,77,70,75,36,29,69]},
+  {h:'10:00',d:[74,97,70,100,50,38,82]},
+  {h:'11:00',d:[69,90,85,89,42,33,76]},
+  {h:'12:00',d:[69,86,85,88,42,35,74]},
+  {h:'13:00',d:[49,64,66,69,29,26,54]},
+  {h:'14:00',d:[49,63,63,64,28,24,52]},
+  {h:'15:00',d:[53,61,68,67,29,26,57]},
+  {h:'16:00',d:[52,65,67,67,31,25,56]},
+  {h:'17:00',d:[61,67,70,68,28,28,59]},
+  {h:'18:00',d:[71,72,76,66,35,33,62]},
+  {h:'19:00',d:[59,59,61,50,30,33,52]},
+  {h:'20:00',d:[43,45,47,34,20,22,36]},
+  {h:'21:00',d:[25,26,27,21,15,14,21]},
+  {h:'22:00',d:[14,14,15,12,8,8,13]},
+  {h:'23:00',d:[12,10,9,7,6,6,7]}
+];
+
+function heatColor(v) {
+  if (v >= 85) return '#e03535';
+  if (v >= 70) return '#c03030';
+  if (v >= 55) return '#8b2020';
+  if (v >= 40) return '#5a1515';
+  if (v >= 25) return '#3a1010';
+  return '#1e0808';
+}
+
+function textColor(v) {
+  return v >= 55 ? '#e4e4e4' : '#707070';
+}
+
+const tbody = document.querySelector('#heatmap tbody');
+heatData.forEach(row => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = '<td>' + row.h + '</td>' +
+    row.d.map(v =>
+      '<td style="background:' + heatColor(v) + ';color:' + textColor(v) + '">' + v + '%</td>'
+    ).join('');
+  tbody.appendChild(tr);
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
