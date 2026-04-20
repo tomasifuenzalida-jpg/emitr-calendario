@@ -492,7 +492,32 @@ body::before{
   </div>
 </section>
 
-<!-- FASE 3 -->
+<!-- PLAN TOGGLE -->
+<section class="reveal">
+  <div class="card" style="border-left:2px solid var(--accent-bright)">
+    <div class="card-header" style="margin-bottom:8px">
+      <h3>Lanzamiento &mdash; Plan A / Plan B</h3>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6">
+      Selecciona el plan activo. El calendario desde hoy (20 abr) en adelante se ajusta automaticamente.
+    </p>
+    <div class="plan-toggle">
+      <button class="plan-btn active" data-plan="a">Plan A &mdash; Lanzamiento Jue 24</button>
+      <button class="plan-btn" data-plan="b">Plan B &mdash; Lanzamiento Mar 29</button>
+    </div>
+    <div class="plan-info plan-a-info" style="font-size:11px;color:var(--text);margin-top:14px;line-height:1.6">
+      <strong style="color:var(--accent-bright)">Plan A (default):</strong> activo si la edicion del live set llega para el 24. Ventana Metricool captura 9 dias post-lanzamiento. Fase 5 cierra antes del 3 may.
+    </div>
+    <div class="plan-info plan-b-info" style="font-size:11px;color:var(--text);margin-top:14px;line-height:1.6;display:none">
+      <strong style="color:var(--accent-bright)">Plan B (contingencia):</strong> activo si la edicion no llega para el 24. Ritmo 2-2-2 dias de silencio. Ventana Metricool captura 4 dias post-lanzamiento. Fase 5 cierra 7 may (post entrega academica).
+    </div>
+  </div>
+</section>
+
+<!-- PLAN A -->
+<div class="plan-content plan-a-content active">
+
+<!-- FASE 3 — PLAN A -->
 <section class="reveal">
   <div class="card">
     <div class="card-header">
@@ -535,13 +560,13 @@ body::before{
     <div class="post-item" data-date="2026-04-22" style="opacity:0.4">
       <div class="post-date" style="color:var(--muted)">22&ndash;23<small>Mie&ndash;Jue</small></div>
       <div class="post-info">
-        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio total &mdash; tension antes del lanzamiento</div>
+        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio total &mdash; 2 dias de tension antes del lanzamiento</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FASE 4 -->
+<!-- FASE 4 — PLAN A -->
 <section class="reveal">
   <div class="card">
     <div class="card-header">
@@ -583,7 +608,7 @@ body::before{
   </div>
 </section>
 
-<!-- FASE 5 -->
+<!-- FASE 5 — PLAN A -->
 <section class="reveal">
   <div class="card">
     <div class="card-header">
@@ -623,6 +648,180 @@ body::before{
     </div>
   </div>
 </section>
+
+</div><!-- /Plan A -->
+
+<!-- PLAN B -->
+<div class="plan-content plan-b-content">
+
+<!-- FASE 3 — PLAN B -->
+<section class="reveal">
+  <div class="card">
+    <div class="card-header">
+      <span class="phase-label">Fase 3</span>
+      <h3>Tension &mdash; 20&ndash;28 Abril</h3>
+      <span class="badge badge-note">Plan B</span>
+    </div>
+
+    <div class="post-item published" data-date="2026-04-20">
+      <div class="post-date">20<small>Lun</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-reel">Reel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-done">Publicado</span>
+        </div>
+        <div class="post-desc">Reel TON &mdash; solo estudio. Sin texto, sin explicacion</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:74%;background:var(--muted)"></div></div>
+          <span class="audience-pct pct-mid">74%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-04-21" style="opacity:0.4">
+      <div class="post-date" style="color:var(--muted)">21&ndash;22<small>Mar&ndash;Mie</small></div>
+      <div class="post-info">
+        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio &mdash; 2 dias post-TON</div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-04-23" style="border-left:2px solid var(--accent-bright);padding-left:14px">
+      <div class="post-date">23<small>Jue</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-reel">Reel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-top">Mejor slot</span>
+        </div>
+        <div class="post-desc">Teaser AZSENDE &mdash; 30 seg, solo "29.04" (asset re-editado)</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:100%;background:var(--accent-intense)"></div></div>
+          <span class="audience-pct pct-top">100%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-04-24" style="opacity:0.4">
+      <div class="post-date" style="color:var(--muted)">24&ndash;25<small>Vie&ndash;Sab</small></div>
+      <div class="post-info">
+        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio &mdash; 2 dias post-teaser</div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-04-26" style="border-left:2px solid var(--accent-bright);padding-left:14px">
+      <div class="post-date">26<small>Dom</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-carrusel">Carrusel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-good">Buen slot</span>
+        </div>
+        <div class="post-desc">Carrusel detalle tecnico &mdash; sintetizadores, manos, equipo en estudio. Sin revelar el espacio del live set</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:82%;background:var(--green-bright)"></div></div>
+          <span class="audience-pct pct-good">82%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-04-27" style="opacity:0.4">
+      <div class="post-date" style="color:var(--muted)">27&ndash;28<small>Lun&ndash;Lun</small></div>
+      <div class="post-info">
+        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio &mdash; 2 dias finales antes del lanzamiento</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 4 — PLAN B -->
+<section class="reveal">
+  <div class="card">
+    <div class="card-header">
+      <span class="phase-label">Fase 4</span>
+      <h3>Revelacion &mdash; 29 Abril</h3>
+      <span class="badge badge-note">Plan B</span>
+    </div>
+
+    <div class="post-item" data-date="2026-04-29" style="border-left:2px solid #a855f7;padding-left:14px">
+      <div class="post-date">29<small>Mar</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-lanzamiento">Lanzamiento</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-top">Top slot</span>
+        </div>
+        <div class="post-desc">Live set completo AZSENDE en YouTube (~25 min) + Reel lanzamiento IG. Cambio foto de perfil. Meta Ads arranca</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:97%;background:var(--accent-bright)"></div></div>
+          <span class="audience-pct pct-top">97%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 5 — PLAN B -->
+<section class="reveal">
+  <div class="card">
+    <div class="card-header">
+      <span class="phase-label">Fase 5</span>
+      <h3>Expansion &mdash; 1&ndash;7 Mayo</h3>
+      <span class="badge badge-note">Plan B</span>
+    </div>
+
+    <div class="post-item" data-date="2026-05-01">
+      <div class="post-date">1<small>Jue</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-carrusel">Carrusel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-top">Mejor slot</span>
+          <span class="badge badge-note">Opcional</span>
+        </div>
+        <div class="post-desc">Carrusel 03 BTS &mdash; si queda material handycam del rodaje (opcional)</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:100%;background:var(--accent-intense)"></div></div>
+          <span class="audience-pct pct-top">100%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-05-03">
+      <div class="post-date">3<small>Dom</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-reel">Reel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-good">Buen slot</span>
+        </div>
+        <div class="post-desc">Segundo reel live set + YouTube Short 01. Coincide con entrega academica</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:82%;background:var(--green-bright)"></div></div>
+          <span class="audience-pct pct-good">82%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-05-07">
+      <div class="post-date">7<small>Jue</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-youtube">YouTube Short</span>
+          <span class="post-time">18:00h</span>
+          <span class="badge badge-note">Fuera ventana</span>
+        </div>
+        <div class="post-desc">YouTube Short 02 &mdash; cierre de campana. Post entrega academica</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:66%;background:var(--muted)"></div></div>
+          <span class="audience-pct pct-mid">66%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /Plan B -->
 
 <div class="divider"></div>
 
@@ -676,23 +875,41 @@ body::before{
           <td>14:00&ndash;16:00</td>
           <td><span class="badge badge-done">Publicado</span></td>
         </tr>
-        <tr>
+        <tr class="plan-row plan-a-row">
           <td>Teaser AZSENDE (Mar 21)</td>
           <td>10:00</td>
           <td>14:00&ndash;16:00</td>
-          <td>&mdash;</td>
+          <td><span class="badge badge-note">Plan A</span></td>
         </tr>
-        <tr>
+        <tr class="plan-row plan-a-row">
           <td style="color:#a855f7">Reel lanzamiento + Live set YT (Jue 24)</td>
           <td>10:00</td>
           <td>14:00&ndash;16:00</td>
-          <td><span class="badge badge-top">Lanzamiento</span></td>
+          <td><span class="badge badge-top">Plan A &mdash; Lanzamiento</span></td>
         </tr>
-        <tr>
+        <tr class="plan-row plan-a-row">
           <td>Segundo reel (Mar 28)</td>
           <td>10:00</td>
           <td>14:00&ndash;16:00</td>
-          <td>&mdash;</td>
+          <td><span class="badge badge-note">Plan A</span></td>
+        </tr>
+        <tr class="plan-row plan-b-row" style="display:none">
+          <td>Teaser AZSENDE (Jue 23)</td>
+          <td>10:00</td>
+          <td>14:00&ndash;16:00</td>
+          <td><span class="badge badge-note">Plan B</span></td>
+        </tr>
+        <tr class="plan-row plan-b-row" style="display:none">
+          <td style="color:#a855f7">Reel lanzamiento + Live set YT (Mar 29)</td>
+          <td>10:00</td>
+          <td>14:00&ndash;16:00</td>
+          <td><span class="badge badge-top">Plan B &mdash; Lanzamiento</span></td>
+        </tr>
+        <tr class="plan-row plan-b-row" style="display:none">
+          <td>Segundo reel (Dom 3 may)</td>
+          <td>10:00</td>
+          <td>14:00&ndash;16:00</td>
+          <td><span class="badge badge-note">Plan B</span></td>
         </tr>
       </tbody>
     </table>
@@ -841,6 +1058,33 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.08 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Plan A / Plan B toggle
+document.querySelectorAll('.plan-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const plan = btn.dataset.plan;
+
+    document.querySelectorAll('.plan-btn').forEach(b => {
+      b.classList.toggle('active', b === btn);
+    });
+
+    document.querySelectorAll('.plan-content').forEach(c => {
+      c.classList.toggle('active', c.classList.contains('plan-' + plan + '-content'));
+    });
+
+    document.querySelectorAll('.plan-info').forEach(p => {
+      p.style.display = p.classList.contains('plan-' + plan + '-info') ? 'block' : 'none';
+    });
+
+    document.querySelectorAll('.plan-row').forEach(r => {
+      r.style.display = r.classList.contains('plan-' + plan + '-row') ? '' : 'none';
+    });
+
+    document.querySelectorAll('.plan-content.active .reveal').forEach(el => {
+      el.classList.add('visible');
+    });
+  });
+});
 </script>
 
 </body>
