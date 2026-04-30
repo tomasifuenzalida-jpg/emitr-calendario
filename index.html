@@ -209,20 +209,6 @@ body::before{
 .rules-box li:last-child{border-bottom:none}
 .rules-box li strong{color:var(--accent-bright)}
 
-/* Plan toggle */
-.plan-toggle{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.plan-btn{
-  padding:6px 16px;border-radius:4px;font-size:11px;font-weight:600;
-  letter-spacing:1px;text-transform:uppercase;cursor:pointer;
-  border:1px solid var(--border);background:var(--surface);color:var(--muted);
-  font-family:var(--font-body);transition:all 0.2s;
-}
-.plan-btn.active{
-  background:var(--accent-deep);color:var(--accent-bright);border-color:var(--accent-dark);
-}
-.plan-content{display:none}
-.plan-content.active{display:block}
-
 /* Divider */
 .divider{
   height:1px;background:var(--border);margin:48px 0;
@@ -258,10 +244,10 @@ body::before{
 
 <!-- HERO -->
 <section class="hero reveal">
-  <div class="hero-label">Campaña EMITR &mdash; 1 Abril &ndash; 2 Mayo 2026</div>
-  <h1>CALENDARIO <span>OPTIMIZADO</span></h1>
-  <h1 style="font-size:clamp(24px,4vw,40px);color:var(--muted);margin-top:-4px">METRICOOL</h1>
-  <p class="hero-sub">Calendario de publicaciones optimizado con datos reales de audiencia conectada. Cada slot ha sido verificado contra el mapa de calor de Metricool para maximizar alcance en una cuenta que necesita recalentamiento.</p>
+  <div class="hero-label">Campaña EMITR &mdash; 1 Abril &ndash; 14 Mayo 2026</div>
+  <h1>CALENDARIO <span>AZSENDE</span></h1>
+  <h1 style="font-size:clamp(24px,4vw,40px);color:var(--muted);margin-top:-4px">EMITR</h1>
+  <p class="hero-sub">Calendario de la campa&ntilde;a completa: 6 fases, 1 abril &mdash; 14 mayo 2026. Slots verificados contra el mapa de calor de Metricool y ajustados por restricciones operativas reales.</p>
 </section>
 
 <div class="container">
@@ -492,175 +478,13 @@ body::before{
   </div>
 </section>
 
-<!-- PLAN TOGGLE -->
-<section class="reveal">
-  <div class="card" style="border-left:2px solid var(--accent-bright)">
-    <div class="card-header" style="margin-bottom:8px">
-      <h3>Lanzamiento &mdash; Plan A / Plan B</h3>
-    </div>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6">
-      Selecciona el plan activo. El calendario desde hoy (20 abr) en adelante se ajusta automaticamente.
-    </p>
-    <div class="plan-toggle">
-      <button class="plan-btn active" data-plan="a">Plan A &mdash; Lanzamiento Jue 24</button>
-      <button class="plan-btn" data-plan="b">Plan B &mdash; Lanzamiento Mar 29</button>
-    </div>
-    <div class="plan-info plan-a-info" style="font-size:11px;color:var(--text);margin-top:14px;line-height:1.6">
-      <strong style="color:var(--accent-bright)">Plan A (default):</strong> activo si la edicion del live set llega para el 24. Ventana Metricool captura 9 dias post-lanzamiento. Fase 5 cierra antes del 3 may.
-    </div>
-    <div class="plan-info plan-b-info" style="font-size:11px;color:var(--text);margin-top:14px;line-height:1.6;display:none">
-      <strong style="color:var(--accent-bright)">Plan B (contingencia):</strong> activo si la edicion no llega para el 24. Ritmo 2-2-2 dias de silencio. Ventana Metricool captura 4 dias post-lanzamiento. Fase 5 cierra 7 may (post entrega academica).
-    </div>
-  </div>
-</section>
-
-<!-- PLAN A -->
-<div class="plan-content plan-a-content active">
-
-<!-- FASE 3 — PLAN A -->
+<!-- FASE 3 — TENSION -->
 <section class="reveal">
   <div class="card">
     <div class="card-header">
       <span class="phase-label">Fase 3</span>
-      <h3>Tension &mdash; 20&ndash;23 Abril</h3>
-    </div>
-
-    <div class="post-item published" data-date="2026-04-20">
-      <div class="post-date">20<small>Lun</small></div>
-      <div class="post-info">
-        <div class="post-top">
-          <span class="post-type type-reel">Reel</span>
-          <span class="post-time">10:00h</span>
-          <span class="badge badge-done">Publicado</span>
-        </div>
-        <div class="post-desc">Reel TON &mdash; solo estudio. Sin texto, sin explicacion</div>
-        <div class="audience-row">
-          <div class="audience-bar-wrap"><div class="audience-bar" style="width:74%;background:var(--muted)"></div></div>
-          <span class="audience-pct pct-mid">74%</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="post-item" data-date="2026-04-21" style="border-left:2px solid var(--accent-bright);padding-left:14px">
-      <div class="post-date">21<small>Mar</small></div>
-      <div class="post-info">
-        <div class="post-top">
-          <span class="post-type type-reel">Reel</span>
-          <span class="post-time">10:00h</span>
-          <span class="badge badge-top">Top slot</span>
-        </div>
-        <div class="post-desc">Teaser AZSENDE &mdash; 30 seg, solo "24.04"</div>
-        <div class="audience-row">
-          <div class="audience-bar-wrap"><div class="audience-bar" style="width:97%;background:var(--accent-bright)"></div></div>
-          <span class="audience-pct pct-top">97%</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="post-item" data-date="2026-04-22" style="opacity:0.4">
-      <div class="post-date" style="color:var(--muted)">22&ndash;23<small>Mie&ndash;Jue</small></div>
-      <div class="post-info">
-        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio total &mdash; 2 dias de tension antes del lanzamiento</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FASE 4 — PLAN A -->
-<section class="reveal">
-  <div class="card">
-    <div class="card-header">
-      <span class="phase-label">Fase 4</span>
-      <h3>Revelacion &mdash; 24&ndash;25 Abril</h3>
-    </div>
-
-    <div class="post-item" data-date="2026-04-24" style="border-left:2px solid #a855f7;padding-left:14px">
-      <div class="post-date">24<small>Jue</small></div>
-      <div class="post-info">
-        <div class="post-top">
-          <span class="post-type type-lanzamiento">Lanzamiento</span>
-          <span class="post-time">10:00h</span>
-          <span class="badge badge-top">Mejor slot</span>
-        </div>
-        <div class="post-desc">Live set completo AZSENDE en YouTube (~25 min) + Reel lanzamiento IG</div>
-        <div class="audience-row">
-          <div class="audience-bar-wrap"><div class="audience-bar" style="width:100%;background:var(--accent-intense)"></div></div>
-          <span class="audience-pct pct-top">100%</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="post-item" data-date="2026-04-25">
-      <div class="post-date">25<small>Vie</small></div>
-      <div class="post-info">
-        <div class="post-top">
-          <span class="post-type type-carrusel">Carrusel</span>
-          <span class="post-time">10:00h</span>
-          <span class="badge badge-weak">Dia debil</span>
-        </div>
-        <div class="post-desc">Carrusel 03 &mdash; BTS del live set (handycam)</div>
-        <div class="audience-row">
-          <div class="audience-bar-wrap"><div class="audience-bar" style="width:50%;background:var(--yellow-bright)"></div></div>
-          <span class="audience-pct pct-weak">50%</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FASE 5 — PLAN A -->
-<section class="reveal">
-  <div class="card">
-    <div class="card-header">
-      <span class="phase-label">Fase 5</span>
-      <h3>Expansion &mdash; 28 Abr &ndash; 2 May</h3>
-    </div>
-
-    <div class="post-item" data-date="2026-04-28">
-      <div class="post-date">28<small>Mar</small></div>
-      <div class="post-info">
-        <div class="post-top">
-          <span class="post-type type-reel">Reel</span>
-          <span class="post-time">10:00h</span>
-        </div>
-        <div class="post-desc">Segundo reel live set + YouTube Short 01</div>
-        <div class="audience-row">
-          <div class="audience-bar-wrap"><div class="audience-bar" style="width:70%;background:var(--muted)"></div></div>
-          <span class="audience-pct pct-mid">70%</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="post-item" data-date="2026-05-02">
-      <div class="post-date">2<small>Sab</small></div>
-      <div class="post-info">
-        <div class="post-top">
-          <span class="post-type type-youtube">YouTube Short</span>
-          <span class="post-time">18:00h</span>
-          <span class="badge badge-weak">Dia debil</span>
-        </div>
-        <div class="post-desc">YouTube Short 02 &mdash; cierre de campana</div>
-        <div class="audience-row">
-          <div class="audience-bar-wrap"><div class="audience-bar" style="width:33%;background:var(--yellow-bright)"></div></div>
-          <span class="audience-pct pct-weak">33%</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</div><!-- /Plan A -->
-
-<!-- PLAN B -->
-<div class="plan-content plan-b-content">
-
-<!-- FASE 3 — PLAN B -->
-<section class="reveal">
-  <div class="card">
-    <div class="card-header">
-      <span class="phase-label">Fase 3</span>
-      <h3>Tension &mdash; 20&ndash;28 Abril</h3>
-      <span class="badge badge-note">Plan B</span>
+      <h3>Tension &mdash; 20&ndash;26 Abril</h3>
+      <span class="badge badge-done">Completada</span>
     </div>
 
     <div class="post-item published" data-date="2026-04-20">
@@ -680,111 +504,128 @@ body::before{
     </div>
 
     <div class="post-item" data-date="2026-04-21" style="opacity:0.4">
-      <div class="post-date" style="color:var(--muted)">21&ndash;22<small>Mar&ndash;Mie</small></div>
+      <div class="post-date" style="color:var(--muted)">21&ndash;25<small>Mar&ndash;Sab</small></div>
       <div class="post-info">
-        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio &mdash; 2 dias post-TON</div>
+        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio intencional &mdash; 5 dias post-TON para que el siguiente movimiento agarre fuerza</div>
       </div>
     </div>
 
-    <div class="post-item" data-date="2026-04-23" style="border-left:2px solid var(--accent-bright);padding-left:14px">
-      <div class="post-date">23<small>Jue</small></div>
+    <div class="post-item published" data-date="2026-04-26">
+      <div class="post-date">26<small>Dom</small></div>
       <div class="post-info">
         <div class="post-top">
           <span class="post-type type-reel">Reel</span>
           <span class="post-time">10:00h</span>
-          <span class="badge badge-top">Mejor slot</span>
+          <span class="badge badge-done">Publicado</span>
         </div>
-        <div class="post-desc">Teaser AZSENDE &mdash; 30 seg, solo "29.04" (asset re-editado)</div>
+        <div class="post-desc">Teaser AZSENDE &mdash; 30 seg, fecha "28.04" (la fecha real del lanzamiento se anuncia en el carrusel del 28)</div>
         <div class="audience-row">
           <div class="audience-bar-wrap"><div class="audience-bar" style="width:100%;background:var(--accent-intense)"></div></div>
           <span class="audience-pct pct-top">100%</span>
         </div>
-      </div>
-    </div>
+        <div style="margin-top:10px;padding:10px 12px;background:rgba(255,255,255,0.03);border-left:2px solid var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.6;white-space:pre-wrap;color:var(--fg)">Caption:
+AZSENDE
 
-    <div class="post-item" data-date="2026-04-24" style="opacity:0.4">
-      <div class="post-date" style="color:var(--muted)">24&ndash;25<small>Vie&ndash;Sab</small></div>
-      <div class="post-info">
-        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio &mdash; 2 dias post-teaser</div>
-      </div>
-    </div>
+28.04
 
-    <div class="post-item" data-date="2026-04-26" style="border-left:2px solid var(--accent-bright);padding-left:14px">
-      <div class="post-date">26<small>Dom</small></div>
-      <div class="post-info">
-        <div class="post-top">
-          <span class="post-type type-carrusel">Carrusel</span>
-          <span class="post-time">10:00h</span>
-          <span class="badge badge-good">Buen slot</span>
-        </div>
-        <div class="post-desc">Carrusel detalle tecnico &mdash; sintetizadores, manos, equipo en estudio. Sin revelar el espacio del live set</div>
-        <div class="audience-row">
-          <div class="audience-bar-wrap"><div class="audience-bar" style="width:82%;background:var(--green-bright)"></div></div>
-          <span class="audience-pct pct-good">82%</span>
-        </div>
-      </div>
-    </div>
+Primer comentario:
+#deeptech #minimaltechno #liveset #undergroundmusic #electronicmusic #visualart #studiolife
 
-    <div class="post-item" data-date="2026-04-27" style="opacity:0.4">
-      <div class="post-date" style="color:var(--muted)">27&ndash;28<small>Lun&ndash;Lun</small></div>
-      <div class="post-info">
-        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio &mdash; 2 dias finales antes del lanzamiento</div>
+Alt text:
+Teaser del live set AZSENDE. Fragmentos del espacio y el artista en el cubo.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FASE 4 — PLAN B -->
+<!-- FASE 4 — ANUNCIO -->
 <section class="reveal">
   <div class="card">
     <div class="card-header">
       <span class="phase-label">Fase 4</span>
-      <h3>Revelacion &mdash; 29 Abril</h3>
-      <span class="badge badge-note">Plan B</span>
+      <h3>Anuncio &mdash; 27&ndash;29 Abril</h3>
+      <span class="badge badge-done">Completada</span>
     </div>
 
-    <div class="post-item" data-date="2026-04-29" style="border-left:2px solid #a855f7;padding-left:14px">
-      <div class="post-date">29<small>Mar</small></div>
+    <div class="post-item published" data-date="2026-04-27" style="opacity:0.4">
+      <div class="post-date" style="color:var(--muted)">27<small>Lun</small></div>
+      <div class="post-info">
+        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio intencional &mdash; sostener el teaser del domingo sin saturar</div>
+      </div>
+    </div>
+
+    <div class="post-item published" data-date="2026-04-28">
+      <div class="post-date">28<small>Mar</small></div>
       <div class="post-info">
         <div class="post-top">
-          <span class="post-type type-lanzamiento">Lanzamiento</span>
+          <span class="post-type type-carrusel">Carrusel</span>
           <span class="post-time">10:00h</span>
-          <span class="badge badge-top">Top slot</span>
+          <span class="badge badge-done">Publicado</span>
         </div>
-        <div class="post-desc">Live set completo AZSENDE en YouTube (~25 min) + Reel lanzamiento IG. Cambio foto de perfil. Meta Ads arranca</div>
+        <div class="post-desc">Carrusel anuncio tracklist &mdash; 5 slides x 10s clavados (50s totales). Visual: cubo exterior, 5 clips distintos. 5 audios distintos, uno por track del setlist (slide 1 = track 1, slide 2 = track 2, etc.). Slide 1 = track mas magnetico del set. Cada audio arranca en el momento mas fuerte del track (drop/hook, no intro). Anuncia la fecha real 30.04</div>
         <div class="audience-row">
           <div class="audience-bar-wrap"><div class="audience-bar" style="width:97%;background:var(--accent-bright)"></div></div>
           <span class="audience-pct pct-top">97%</span>
+        </div>
+        <div style="margin-top:10px;padding:10px 12px;background:rgba(255,255,255,0.03);border-left:2px solid var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.6;white-space:pre-wrap;color:var(--fg)">Caption:
+AZSENDE / live set
+
+01 &mdash; [track 1]
+02 &mdash; [track 2]
+03 &mdash; [track 3]
+04 &mdash; [track 4]
+05 &mdash; [track 5]
+
+30.04
+
+Sin "Out" (no es release musical). Sin emojis.</div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-04-29" style="opacity:0.4">
+      <div class="post-date" style="color:var(--muted)">29<small>Mie</small></div>
+      <div class="post-info">
+        <div style="font-size:12px;color:var(--muted);font-style:italic">Silencio intencional &mdash; un dia antes del lanzamiento, sostener tension sin spoilear</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 5 — LANZAMIENTO -->
+<section class="reveal">
+  <div class="card" style="border-left:2px solid #a855f7">
+    <div class="card-header">
+      <span class="phase-label" style="background:#1a0d1a;color:#a855f7;border-color:#2a1c2a">Fase 5</span>
+      <h3>Lanzamiento &mdash; Jue 30 Abril 20:00h</h3>
+    </div>
+
+    <div class="post-item" data-date="2026-04-30" style="border-left:2px solid #a855f7;padding-left:14px">
+      <div class="post-date" style="color:#a855f7">30<small>Jue</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-lanzamiento">Lanzamiento</span>
+          <span class="post-time">20:00h</span>
+          <span class="badge badge-note">Slot ajustado por procesamiento 4K</span>
+        </div>
+        <div class="post-desc">Live set completo AZSENDE en YouTube (~25 min, upload manual sin Premiere) + Reel lanzamiento IG sincronizado + cambio foto de perfil IG + activacion Meta Ads (3 dias hasta 3 may). Operativa: subir el archivo 4K a YT como No listado a las 15:30, verificar que 2160p este disponible en pestana incognito a las 19:30, cambiar a Publico a las 20:00.</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:34%;background:var(--yellow-bright)"></div></div>
+          <span class="audience-pct pct-weak">34%</span>
+        </div>
+        <div style="margin-top:10px;padding:10px 12px;background:rgba(168,85,247,0.06);border-left:2px solid #a855f7;font-size:11px;line-height:1.6;color:var(--text)">
+          <strong style="color:#a855f7">Nota operativa:</strong> el slot 20:00 jueves es 34% (no 100% del slot 10:00) pero se prioriza calidad tecnica sobre slot optimo. Procesamiento 4K en YouTube tarda 1-4h tras el upload. Subir a las 15:30 con Premiere a las 18-19h tenia ~50% probabilidad de estrenar en 1080p degradado en el momento estelar. Cambio Premiere &rarr; Upload manual elimina ese riesgo a costa de cuenta regresiva, chat live y notificacion fuerte.
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FASE 5 — PLAN B -->
+<!-- FASE 6 — EXPANSION -->
 <section class="reveal">
   <div class="card">
     <div class="card-header">
-      <span class="phase-label">Fase 5</span>
-      <h3>Expansion &mdash; 1&ndash;7 Mayo</h3>
-      <span class="badge badge-note">Plan B</span>
-    </div>
-
-    <div class="post-item" data-date="2026-05-01">
-      <div class="post-date">1<small>Jue</small></div>
-      <div class="post-info">
-        <div class="post-top">
-          <span class="post-type type-carrusel">Carrusel</span>
-          <span class="post-time">10:00h</span>
-          <span class="badge badge-top">Mejor slot</span>
-          <span class="badge badge-note">Opcional</span>
-        </div>
-        <div class="post-desc">Carrusel 03 BTS &mdash; si queda material handycam del rodaje (opcional)</div>
-        <div class="audience-row">
-          <div class="audience-bar-wrap"><div class="audience-bar" style="width:100%;background:var(--accent-intense)"></div></div>
-          <span class="audience-pct pct-top">100%</span>
-        </div>
-      </div>
+      <span class="phase-label">Fase 6</span>
+      <h3>Expansion &mdash; 3&ndash;14 Mayo</h3>
     </div>
 
     <div class="post-item" data-date="2026-05-03">
@@ -795,7 +636,7 @@ body::before{
           <span class="post-time">10:00h</span>
           <span class="badge badge-good">Buen slot</span>
         </div>
-        <div class="post-desc">Segundo reel live set + YouTube Short 01. Coincide con entrega academica</div>
+        <div class="post-desc">Segundo reel live set + YouTube Short 01. Coincide con entrega academica. Meta Ads sugerido: 15&euro; extra al reel (3&euro;/dia x 5 dias)</div>
         <div class="audience-row">
           <div class="audience-bar-wrap"><div class="audience-bar" style="width:82%;background:var(--green-bright)"></div></div>
           <span class="audience-pct pct-good">82%</span>
@@ -809,19 +650,49 @@ body::before{
         <div class="post-top">
           <span class="post-type type-youtube">YouTube Short</span>
           <span class="post-time">18:00h</span>
-          <span class="badge badge-note">Fuera ventana</span>
+          <span class="badge badge-note">Fuera ventana academica</span>
         </div>
-        <div class="post-desc">YouTube Short 02 &mdash; cierre de campana. Post entrega academica</div>
+        <div class="post-desc">YouTube Short 02 &mdash; post entrega academica</div>
         <div class="audience-row">
           <div class="audience-bar-wrap"><div class="audience-bar" style="width:66%;background:var(--muted)"></div></div>
           <span class="audience-pct pct-mid">66%</span>
         </div>
       </div>
     </div>
+
+    <div class="post-item" data-date="2026-05-11" style="border-left:2px solid var(--accent-bright);padding-left:14px">
+      <div class="post-date">11<small>Lun</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-carrusel">Carrusel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-good">Cierre serie analogica</span>
+        </div>
+        <div class="post-desc">Carrusel texturas del espacio &mdash; fotos analogicas de detalles (tul arrugado, luz en tela, cables, madera, monitor). Cierra la trilogia analogica de la campana</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:70%;background:var(--green-bright)"></div></div>
+          <span class="audience-pct pct-good">70%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-item" data-date="2026-05-14" style="border-left:2px solid var(--accent-bright);padding-left:14px">
+      <div class="post-date">14<small>Jue</small></div>
+      <div class="post-info">
+        <div class="post-top">
+          <span class="post-type type-reel">Reel</span>
+          <span class="post-time">10:00h</span>
+          <span class="badge badge-top">Mejor slot</span>
+        </div>
+        <div class="post-desc">Reel fragmento del live set &mdash; cierre post-lanzamiento con otro angulo/fragmento. Cierra ventana de 2 semanas de expansion</div>
+        <div class="audience-row">
+          <div class="audience-bar-wrap"><div class="audience-bar" style="width:100%;background:var(--accent-intense)"></div></div>
+          <span class="audience-pct pct-top">100%</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
-
-</div><!-- /Plan B -->
 
 <div class="divider"></div>
 
@@ -836,6 +707,7 @@ body::before{
       <li><strong>Por que no inmediatamente:</strong> Instagram interpreta que el reel no tiene traccion organica propia</li>
       <li><strong>Por que no al dia siguiente:</strong> Pierde relevancia y el algoritmo ya decidio su distribucion</li>
       <li><strong>Formato:</strong> Compartir el reel en story sin anadir nada, o con un sticker minimo. Sin texto tipo "nuevo post"</li>
+      <li><strong>Excepcion lanzamiento 30 abr 20:00:</strong> ventana 4-6h cae fuera de prime time (00-02h). Compartir 2-3h despues (22:00-23:00 mismo dia) para no esperar al dia siguiente</li>
     </ul>
   </div>
 
@@ -870,46 +742,40 @@ body::before{
           <td><span class="badge badge-done">Publicado</span></td>
         </tr>
         <tr style="opacity:0.45">
-          <td>Reel TON (Lun 20)</td>
+          <td>Reel TON (Lun 20 abr)</td>
           <td>10:00</td>
           <td>14:00&ndash;16:00</td>
           <td><span class="badge badge-done">Publicado</span></td>
         </tr>
-        <tr class="plan-row plan-a-row">
-          <td>Teaser AZSENDE (Mar 21)</td>
+        <tr style="opacity:0.45">
+          <td>Teaser AZSENDE (Dom 26 abr)</td>
           <td>10:00</td>
           <td>14:00&ndash;16:00</td>
-          <td><span class="badge badge-note">Plan A</span></td>
+          <td><span class="badge badge-done">Publicado</span></td>
         </tr>
-        <tr class="plan-row plan-a-row">
-          <td style="color:#a855f7">Reel lanzamiento + Live set YT (Jue 24)</td>
+        <tr style="opacity:0.45">
+          <td>Carrusel anuncio tracklist (Mar 28 abr)</td>
           <td>10:00</td>
           <td>14:00&ndash;16:00</td>
-          <td><span class="badge badge-top">Plan A &mdash; Lanzamiento</span></td>
+          <td><span class="badge badge-done">Publicado</span></td>
         </tr>
-        <tr class="plan-row plan-a-row">
-          <td>Segundo reel (Mar 28)</td>
-          <td>10:00</td>
-          <td>14:00&ndash;16:00</td>
-          <td><span class="badge badge-note">Plan A</span></td>
+        <tr>
+          <td style="color:#a855f7">Reel lanzamiento + Live set YT (Jue 30 abr)</td>
+          <td>20:00</td>
+          <td>22:00&ndash;23:00 mismo dia</td>
+          <td><span class="badge badge-top">Lanzamiento</span></td>
         </tr>
-        <tr class="plan-row plan-b-row" style="display:none">
-          <td>Teaser AZSENDE (Jue 23)</td>
+        <tr>
+          <td>Segundo reel + YT Short 01 (Dom 3 may)</td>
           <td>10:00</td>
           <td>14:00&ndash;16:00</td>
-          <td><span class="badge badge-note">Plan B</span></td>
+          <td><span class="badge badge-note">Pendiente</span></td>
         </tr>
-        <tr class="plan-row plan-b-row" style="display:none">
-          <td style="color:#a855f7">Reel lanzamiento + Live set YT (Mar 29)</td>
+        <tr>
+          <td>Reel fragmento (Jue 14 may)</td>
           <td>10:00</td>
           <td>14:00&ndash;16:00</td>
-          <td><span class="badge badge-top">Plan B &mdash; Lanzamiento</span></td>
-        </tr>
-        <tr class="plan-row plan-b-row" style="display:none">
-          <td>Segundo reel (Dom 3 may)</td>
-          <td>10:00</td>
-          <td>14:00&ndash;16:00</td>
-          <td><span class="badge badge-note">Plan B</span></td>
+          <td><span class="badge badge-note">Pendiente</span></td>
         </tr>
       </tbody>
     </table>
@@ -1058,33 +924,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.08 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Plan A / Plan B toggle
-document.querySelectorAll('.plan-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const plan = btn.dataset.plan;
-
-    document.querySelectorAll('.plan-btn').forEach(b => {
-      b.classList.toggle('active', b === btn);
-    });
-
-    document.querySelectorAll('.plan-content').forEach(c => {
-      c.classList.toggle('active', c.classList.contains('plan-' + plan + '-content'));
-    });
-
-    document.querySelectorAll('.plan-info').forEach(p => {
-      p.style.display = p.classList.contains('plan-' + plan + '-info') ? 'block' : 'none';
-    });
-
-    document.querySelectorAll('.plan-row').forEach(r => {
-      r.style.display = r.classList.contains('plan-' + plan + '-row') ? '' : 'none';
-    });
-
-    document.querySelectorAll('.plan-content.active .reveal').forEach(el => {
-      el.classList.add('visible');
-    });
-  });
-});
 </script>
 
 </body>
